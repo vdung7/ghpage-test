@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css">
 <body>
 
+<div class="w3-container w3-center">
+<h2><i>(TEST PAGE)</i></h2>
+<h1>Who invited you?</h1>
 
-<h1>TEST PAGE</h1>
+<p>An invitation code is required.<br>Find it in your referrer's message.</p>
 
-<p>Press SIGN IN button below to let rtHome mobile app start sign-in process</p>
+<form name="testForm" onsubmit="return testfunc()">
+  <b>Invitation code:</b><br><input type="text" name="ivtcode"><br><br>
+  <input class="w3-btn w3-white w3-border w3-theme w3-round-large" type="submit" value="Submit">
+</form>
 
-<button onclick="testfunc()">Click me</button>
+<p><i>(Submit button let rtHome mobile app start sign-in process)</i></p>
 
-<p id="demo"></p>
+</div>
 
 <script>
 function testfunc() {
-  App.signin();
+  let x = document.forms["testForm"]["ivtcode"].value;
+  if (x == "") {
+    alert("An invitation code is required");
+  } else {
+    App.signin();
+  }
+  return false;
 }
 </script>
+
 </body>
-</html>
