@@ -13,8 +13,9 @@
 <p>An invitation code is required.<br>Find it in your referrer's message.</p>
 
 <form name="testForm" onsubmit="return testfunc()">
-  <b>Invitation code:</b><br><input type="text" name="ivtcode"><br><br>
+  <b>Invitation code:</b><br><input type="text" name="ivtcode"><p id="testFormErr" class="w3-theme"></p><br>
   <input class="w3-btn w3-white w3-border w3-theme w3-round-large" type="submit" value="Submit">
+  
 </form>
 
 <p><i>(Submit button let rtHome mobile app start sign-in process)</i></p>
@@ -25,7 +26,7 @@
 function testfunc() {
   let x = document.forms["testForm"]["ivtcode"].value;
   if (x == "") {
-    alert("An invitation code is required");
+    document.getElementById("testFormErr").innerHTML = "!! An invitation code is required";
   } else {
     App.signin();
   }
