@@ -14,7 +14,12 @@
 
 <form name="testForm" onsubmit="return testfunc()">
   <b>Invitation code:</b><br><input type="text" name="ivtcode"><p id="testFormErr1" class="w3-theme"></p>
-  <b>Phone number:</b><br><input type="text" name="phonenumber"><p id="testFormErr2" class="w3-theme"></p><br>
+  <b>Phone number:</b><br><input type="text" name="phonenumber"><p id="testFormErr2" class="w3-theme"></p>
+  
+  <input type="checkbox" id="isRegistration">
+  <label for="isRegistration">Registrations</label>
+  
+  <br><br>
   <input class="w3-btn w3-white w3-border w3-theme w3-round-large" type="submit" value="Submit">
   
 </form>
@@ -32,7 +37,14 @@ function testfunc() {
   } else if (phonenumber == "") {
     document.getElementById("testFormErr2").innerHTML = "!! An phone number is required";
   } else {
-    App.signin("context:nongdan;phone_number:"+phonenumber);
+    var isRegistration = document.getElementById("isRegistration");
+    if (isRegistration.checked == true) {
+      App.register("context:nongdan;phone_number:"+phonenumber);
+      //alert("register:"+"context:nongdan;phone_number:"+phonenumber);
+    } else {
+      App.signin("context:nongdan;phone_number:"+phonenumber);
+      //alert("signin:"+"context:nongdan;phone_number:"+phonenumber)
+    }
   }
   return false;
 }
