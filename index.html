@@ -13,7 +13,8 @@
 <p>An invitation code is required.<br>Find it in your referrer's message.</p>
 
 <form name="testForm" onsubmit="return testfunc()">
-  <b>Invitation code:</b><br><input type="text" name="ivtcode"><p id="testFormErr" class="w3-theme"></p><br>
+  <b>Invitation code:</b><br><input type="text" name="ivtcode"><p id="testFormErr1" class="w3-theme"></p>
+  <b>Phone number:</b><br><input type="text" name="phonenumber"><p id="testFormErr2" class="w3-theme"></p><br>
   <input class="w3-btn w3-white w3-border w3-theme w3-round-large" type="submit" value="Submit">
   
 </form>
@@ -24,11 +25,14 @@
 
 <script>
 function testfunc() {
-  let x = document.forms["testForm"]["ivtcode"].value;
-  if (x == "") {
-    document.getElementById("testFormErr").innerHTML = "!! An invitation code is required";
+  let ivtcode = document.forms["testForm"]["ivtcode"].value;
+  let phonenumber = document.forms["testForm"]["phonenumber"].value;
+  if (ivtcode == "") {
+    document.getElementById("testFormErr1").innerHTML = "!! An invitation code is required";
+  } else if (phonenumber == "") {
+    document.getElementById("testFormErr2").innerHTML = "!! An phone number is required";
   } else {
-    App.signin();
+    App.signin("context:nongdan;phone_number:"+phonenumber);
   }
   return false;
 }
