@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-red.css">
 <body>
 
 <div class="w3-container w3-display-middle">
@@ -26,9 +27,15 @@
 
 <p><i>(Submit button let rtHome mobile app start sign-in process)</i></p>
 
+<button class="w3-btn w3-white w3-border w3-round-large" onclick="enterGuestMode()">Button</button>
+
 </div>
 
 <script>
+function enterGuestMode() {
+  App.guest();
+  //alert("Enter guest mode")
+}
 function testfunc() {
   let ivtcode = document.forms["testForm"]["ivtcode"].value;
   let phonenumber = document.forms["testForm"]["phonenumber"].value;
