@@ -1,95 +1,76 @@
 <!DOCTYPE html>
 <html>
-<title>rtHome</title>
-<head><script src="ios.js"></script></head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
-<body>
+  <title>rtHome</title>
 
-<div class="w3-container w3-display-middle">
-<h2><i>(TEST PAGE)</i></h2>
-<h3>Who invited you?</h3>
+  <head>
+    <script type="text/javascript">
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        document.write("ios.js");
+      }
+    </script>
+  </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-light-green.css">
 
-<p>An invitation code is required.<br>Find it in your referrer's message.</p>
+  <body>
 
-<form name="testForm" onsubmit="return testfunc()">
-  <b>Invitation code:</b><br><input type="text" name="ivtcode"><p id="testFormErr1" class="w3-theme"></p>
-  <b>Phone number:</b><br><input type="text" name="phonenumber"><p id="testFormErr2" class="w3-theme"></p>
-  
-  <input type="checkbox" id="isRegistration">
-  <label for="isRegistration">Registrations</label>
-  
-  <br><br>
-  <input class="w3-btn w3-white w3-border w3-theme w3-round-large" type="submit" value="Submit">
-  
-</form>
+    <div class="w3-container w3-display-middle">
+      <h2><i>(TEST PAGE)</i></h2>
+      <h3>Who invited you?</h3>
 
-<p><i>(Submit button let rtHome mobile app start sign-in process)</i></p>
+      <p>An invitation code is required.<br>Find it in your referrer's message.</p>
 
-<button class="w3-btn w3-white w3-border w3-round-large" onclick="enterGuestMode()">Enter guest mode</button>
+      <form name="testForm" onsubmit="return testfunc()">
+        <b>Invitation code:</b><br><input type="text" name="ivtcode">
+        <p id="testFormErr1" class="w3-theme"></p>
+        <b>Phone number:</b><br><input type="text" name="phonenumber">
+        <p id="testFormErr2" class="w3-theme"></p>
 
-<button class="w3-btn w3-white w3-border w3-round-large" onclick="showPlatform()">Check mobile platform</button>
-<p id="checkPlatform">
+        <input type="checkbox" id="isRegistration">
+        <label for="isRegistration">Registrations</label>
 
-</div>
+        <br><br>
+        <input class="w3-btn w3-white w3-border w3-theme w3-round-large" type="submit" value="Submit">
 
-<script>
-function showPlatform() {
-	//alert(getMobileOperatingSystem());
-  document.getElementById("checkPlatform").innerHTML = "> " + getMobileOperatingSystem();
-}
+      </form>
 
-/**
- * Determine the mobile operating system.
- * This function returns one of 'iOS', 'Android', 'Windows Phone', or 'unknown'.
- *
- * @returns {String}
- */
-function getMobileOperatingSystem() {
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      <p><i>(Submit button let rtHome mobile app start sign-in process)</i></p>
 
-    // Windows Phone must come first because its UA also contains "Android"
-    if (/windows phone/i.test(userAgent)) {
-        return "Windows Phone";
-    }
+      <button class="w3-btn w3-white w3-border w3-round-large" onclick="enterGuestMode()">Enter guest mode</button>
 
-    if (/android/i.test(userAgent)) {
-        return "Android";
-    }
+      <p id="checkPlatform"></p>
 
-    // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        return "iOS";
-    }
+    </div>
 
-    return "unknown";
-}
+    <script>
+      function enterGuestMode() {
+        App.guest();
+        //alert("Enter guest mode");
+      }
 
-function enterGuestMode() {
-  App.guest();
-  //alert("Enter guest mode");
-}
-function testfunc() {
-  let ivtcode = document.forms["testForm"]["ivtcode"].value;
-  let phonenumber = document.forms["testForm"]["phonenumber"].value;
-  if (ivtcode == "") {
-    document.getElementById("testFormErr1").innerHTML = "!! An invitation code is required";
-  } else if (phonenumber == "") {
-    document.getElementById("testFormErr2").innerHTML = "!! An phone number is required";
-  } else {
-    var isRegistration = document.getElementById("isRegistration");
-    if (isRegistration.checked == true) {
-      App.register("context:nongdan;phone_number:"+phonenumber);
-      //alert("register:"+"context:nongdan;phone_number:"+phonenumber);
-    } else {
-      App.signin("context:nongdan;phone_number:"+phonenumber);
-      //alert("signin:"+"context:nongdan;phone_number:"+phonenumber)
-    }
-  }
-  return false;
-}
-</script>
+      function testfunc() {
+        let ivtcode = document.forms["testForm"]["ivtcode"].value;
+        let phonenumber = document.forms["testForm"]["phonenumber"].value;
+        if (ivtcode == "") {
+          document.getElementById("testFormErr1").innerHTML = "!! An invitation code is required";
+        } else if (phonenumber == "") {
+          document.getElementById("testFormErr2").innerHTML = "!! An phone number is required";
+        } else {
+          var isRegistration = document.getElementById("isRegistration");
+          if (isRegistration.checked == true) {
+            App.register("context:nongdan;phone_number:" + phonenumber);
+            //alert("register:"+"context:nongdan;phone_number:"+phonenumber);
+          } else {
+            App.signin("context:nongdan;phone_number:" + phonenumber);
+            //alert("signin:"+"context:nongdan;phone_number:"+phonenumber)
+          }
+        }
+        return false;
+      }
 
-</body>
+    </script>
+
+  </body>
