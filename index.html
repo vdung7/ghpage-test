@@ -30,13 +30,15 @@
 
 <button class="w3-btn w3-white w3-border w3-round-large" onclick="enterGuestMode()">Enter guest mode</button>
 
-</div>
+<button class="w3-btn w3-white w3-border w3-round-large" onclick="showPlatform()">Check mobile platform</button>
+<p id="checkPlatform">
 
-<div style="font-weight:bold; text-align:right;position: absolute;bottom: 0; right: 0; "><p onclick="showPlatform()">Click to check platform</p></div>
+</div>
 
 <script>
 function showPlatform() {
-	alert(getMobileOperatingSystem());
+	//alert(getMobileOperatingSystem());
+  document.getElementById("checkPlatform").innerHTML = "> " + getMobileOperatingSystem();
 }
 
 /**
